@@ -1,110 +1,80 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, Image, FlatList, SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { TouchableOpacity , TextInput } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-
-export default function TabTwoScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
-  );
+interface Restaurant {
+  name: string;
+  categories: string;
+  imageUrl: string;
+  id: number;
 }
 
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});
+const restaurants: Restaurant[] = [
+  { id: 1, name: 'Choose Kigali', categories: 'World, African, Pizzeria, Coffee', imageUrl: 'https://www.google.com/imgres?q=restaurant%20image%20in%20rwanda&imgurl=https%3A%2F%2Fwww.explorerwandatours.com%2Fwp-content%2Fuploads%2F2023%2F03%2Frepubloungekigali-1024x683-2.jpg&imgrefurl=https%3A%2F%2Fwww.explorerwandatours.com%2Ftravel-blog%2Ftop-10-restaurants-in-rwandas-kigali-city.html&docid=ZzDMaSVC4fxu5M&tbnid=MjcRpdYuzL44AM&vet=12ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA..i&w=1024&h=683&hcb=2&ved=2ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA' },
+  { id: 2,name: 'Choose Kigali1', categories: 'World, African, Pizzeria, Coffee', imageUrl: 'https://www.google.com/imgres?q=restaurant%20image%20in%20rwanda&imgurl=https%3A%2F%2Fwww.explorerwandatours.com%2Fwp-content%2Fuploads%2F2023%2F03%2Frepubloungekigali-1024x683-2.jpg&imgrefurl=https%3A%2F%2Fwww.explorerwandatours.com%2Ftravel-blog%2Ftop-10-restaurants-in-rwandas-kigali-city.html&docid=ZzDMaSVC4fxu5M&tbnid=MjcRpdYuzL44AM&vet=12ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA..i&w=1024&h=683&hcb=2&ved=2ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA' },
+  { id: 3, name: 'Choose Kigali2', categories: 'World, African, Pizzeria, Coffee', imageUrl: 'https://www.google.com/imgres?q=restaurant%20image%20in%20rwanda&imgurl=https%3A%2F%2Fwww.explorerwandatours.com%2Fwp-content%2Fuploads%2F2023%2F03%2Frepubloungekigali-1024x683-2.jpg&imgrefurl=https%3A%2F%2Fwww.explorerwandatours.com%2Ftravel-blog%2Ftop-10-restaurants-in-rwandas-kigali-city.html&docid=ZzDMaSVC4fxu5M&tbnid=MjcRpdYuzL44AM&vet=12ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA..i&w=1024&h=683&hcb=2&ved=2ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA' },
+  { id: 4, name: 'Choose Kigali3', categories: 'World, African, Pizzeria, Coffee', imageUrl: 'https://www.google.com/imgres?q=restaurant%20image%20in%20rwanda&imgurl=https%3A%2F%2Fwww.explorerwandatours.com%2Fwp-content%2Fuploads%2F2023%2F03%2Frepubloungekigali-1024x683-2.jpg&imgrefurl=https%3A%2F%2Fwww.explorerwandatours.com%2Ftravel-blog%2Ftop-10-restaurants-in-rwandas-kigali-city.html&docid=ZzDMaSVC4fxu5M&tbnid=MjcRpdYuzL44AM&vet=12ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA..i&w=1024&h=683&hcb=2&ved=2ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA' },
+  { id: 5, name: 'Choose Kigali4', categories: 'World, African, Pizzeria, Coffee', imageUrl: 'https://www.google.com/imgres?q=restaurant%20image%20in%20rwanda&imgurl=https%3A%2F%2Fwww.explorerwandatours.com%2Fwp-content%2Fuploads%2F2023%2F03%2Frepubloungekigali-1024x683-2.jpg&imgrefurl=https%3A%2F%2Fwww.explorerwandatours.com%2Ftravel-blog%2Ftop-10-restaurants-in-rwandas-kigali-city.html&docid=ZzDMaSVC4fxu5M&tbnid=MjcRpdYuzL44AM&vet=12ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA..i&w=1024&h=683&hcb=2&ved=2ahUKEwjSweXnoIeNAxWMa0EAHVaHFXUQM3oECBgQAA' },
+];
+
+const RestaurantItem = ({ name, categories, imageUrl , id }: Restaurant) => {
+  const router = useRouter()
+
+  const handlePress = () => {
+    router.push({
+      pathname: '/restaurant/[id]',
+      params: { id: id.toString(), name },
+    });
+  };
+
+  return (
+    <TouchableOpacity
+    onPress={handlePress}
+     className="flex-row p-4 bg-gray-100 mb-4 rounded-lg ">
+      <Image
+         source={require('../../assets/resto.jpeg')} 
+        className="w-12 h-12 rounded-lg"
+      />
+      <View className="ml-4 space-y-4">
+        <Text className="text-lg font-bold">{name}</Text>
+        <Text className="text-gray-500">{categories}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const NearbyResto = () => {
+  return (
+    <SafeAreaView className="flex-1  bg-white">
+      <StatusBar style="auto" />
+      <View className='w-full my-2 '>
+    
+
+             <TextInput
+                  className="bg-white w-full text-2xl rounded-[0.7rem] px-4  py-3 text-gray-500"
+                  placeholder="search..."
+                  placeholderTextColor="#9ca3af"
+                />
+
+        <TouchableOpacity>
+    
+        </TouchableOpacity>
+      </View>
+      <View className='bg-neutral-400 h-[0.1rem] w-full' />
+      <View className="p-4">
+        <Text className="text-orange-500 text-base font-semibold mb-2">Nearby Restaurant</Text>
+        <FlatList
+          data={restaurants}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => <RestaurantItem {...item} />}
+          ListHeaderComponent={<View className="h-2" />}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default NearbyResto;
