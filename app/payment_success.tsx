@@ -47,7 +47,7 @@ const App = () => {
 
   return (
     <View className="flex-1 gap-12 bg-black justify-center items-center p-4">
-      <Image source={require('../assets/pay.png')} className="w-32 h-32 mb-4" />
+      <Image source={require('../assets/cash.jpg')} className="w-32 h-32 mb-4" />
       <Text className="text-orange-500 text-2xl font-bold mb-2">Payment Success, Yayy!</Text>
       <Text className="text-white text-center mb-4">We will send order details and invoice in your contact no. and registered email</Text>
       <TouchableOpacity className=" p-4 rounded-lg mb-4">

@@ -33,13 +33,13 @@ const RestaurantItem = ({ name, categories, imageUrl , id }: Restaurant) => {
   return (
     <TouchableOpacity
     onPress={handlePress}
-     className="flex-row p-4 bg-gray-100 mb-4 rounded-lg ">
+     className="flex-row p-4 bg-gray-100 mb-4  shadow-sm shadow-neutral-100 rounded-lg ">
       <Image
          source={require('../../assets/resto.jpeg')} 
-        className="w-12 h-12 rounded-lg"
+        className="w-[4rem] h-[4rem] rounded-lg"
       />
-      <View className="ml-4 space-y-4">
-        <Text className="text-lg font-bold">{name}</Text>
+      <View className="ml-4 space-y-8">
+        <Text className="text-lg mb-2 font-bold">{name}</Text>
         <Text className="text-gray-500">{categories}</Text>
       </View>
     </TouchableOpacity>
