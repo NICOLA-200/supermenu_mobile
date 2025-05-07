@@ -17,3 +17,12 @@ export interface CartItem {
   unitPrice: number;
   totalPrice: number;
 }
+
+
+export interface Restaurant {
+  id: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+  menu: string[];
+}

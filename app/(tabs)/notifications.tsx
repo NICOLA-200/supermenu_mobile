@@ -3,7 +3,7 @@ import React from 'react'
 
 const notifications = () => {
   return (
-    <View>
+    <View className='flex flex-1 justify-center items-center'>
       <Text>notifications</Text>
     </View>
   )

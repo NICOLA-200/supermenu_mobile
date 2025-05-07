@@ -4,14 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import axios from '@/lib/axios.config';
+import { Restaurant } from '@/types';
+import  { useToast } from 'react-native-toast-notifications';
 
-interface Restaurant {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-  menu: string[];
-}
+
 
 const RestaurantItem = ({ name, description, imageUrl, id }: Restaurant) => {
   const router = useRouter();
@@ -36,9 +32,10 @@ const RestaurantItem = ({ name, description, imageUrl, id }: Restaurant) => {
   );
 };
 
-const NearbyResto = () => {
+const Restoraurant = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
+  const toast = useToast()
 
   const fetchRestaurants = async () => {
     try {
@@ -46,8 +43,12 @@ const NearbyResto = () => {
       setRestaurants(response.data);
     } catch (error) {
       console.error('Failed to fetch restaurants', error);
+      toast.show("Price must be greater than 0", {
+        type: 'danger'
+    });
     } finally {
       setLoading(false);
+
     }
   };
 
@@ -60,16 +61,18 @@ const NearbyResto = () => {
       <StatusBar style="auto" />
       <View className="w-full my-2 px-4">
         <TextInput
-          className="bg-white w-full text-xl rounded-lg px-4 py-3 border border-gray-300 text-gray-700"
+          className="bg-white w-full text-xl rounded-lg px-4 py-3  text-gray-700"
           placeholder="Search..."
           placeholderTextColor="#9ca3af"
         />
       </View>
       <View className="bg-neutral-400 h-[1px] w-full" />
       <View className="p-4">
-        <Text className="text-orange-500 text-base font-semibold mb-2">Nearby Restaurants</Text>
+        <Text className="text-orange-500 text-base font-semibold mb-2">Restaurants</Text>
         {loading ? (
+          
           <ActivityIndicator size="large" color="#FFA500" />
+          
         ) : (
           <FlatList
             data={restaurants}
@@ -83,4 +86,4 @@ const NearbyResto = () => {
   );
 };
 
-export default NearbyResto;
+export default Restoraurant;

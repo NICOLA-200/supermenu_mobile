@@ -22,9 +22,9 @@ export default function HomeScreen() {
     isAuthenticated ? (
     <View className="flex-1 bg-orange-400 justify-center gap-y-12 items-center p-4">
       {/* Search Bar */}
-      <View className="w-full items-center max-w-md mb-8">
+      <View className="w-full items-center max-w-md bg-white pr-12 rounded-lg mb-8">
         <TextInput
-          className="bg-white w-[80%] rounded-[0.7rem] px-4 py-3 text-gray-500"
+          className="bg-white w-[80%] rounded-[1.3rem] px-4  py-3 text-gray-500"
           placeholder="Search for your preferred restaurant"
           placeholderTextColor="#9ca3af"
         />
@@ -32,12 +32,12 @@ export default function HomeScreen() {
           name="search"
           size={20}
           color="#f97316"
-          style={{ position: 'absolute', right: 12, top: 8 }}
+          style={{ position: 'absolute', right: 5, top: 8 }}
         />
       </View>
 
       {/* OR Text */}
-      <Text className="text-black font-extrabold text-lg mb-4">or</Text>
+      <Text className="text-black font-extrabold text-xl mb-4">or</Text>
 
       {/* QR Code Section */}
       <TouchableOpacity
@@ -48,7 +48,7 @@ export default function HomeScreen() {
       </TouchableOpacity>
 
       {/* Scan, Pay & Enjoy Text */}
-      <Text className="text-black  text-5xl font-bold ">Scan, Pay & Enjoy!</Text>
+      <Text className="text-black  text-3xl font-bold ">Scan, Pay & Enjoy!</Text>
     </View>
     ) : (
       <View className='flex flex-1 justify-center items-center'>
