@@ -10,11 +10,7 @@ interface Drink {
   description: string;
 }
 
-interface PaymentMethod {
-  id: number;
-  name: string;
-  image: any;
-}
+
 
 const App = () => {
   const [drinks] = useState<Drink[]>([
@@ -24,8 +20,6 @@ const App = () => {
   ]);
 
   const [quantities, setQuantities] = useState<number[]>(new Array(drinks.length).fill(0));
-  const [checkoutVisible, setCheckoutVisible] = useState(false);
-  const [paymentSuccessVisible, setPaymentSuccessVisible] = useState(false);
 
   const updateQuantity = (index: number, change: number) => {
     const newQuantities = [...quantities];
@@ -33,9 +27,7 @@ const App = () => {
     setQuantities(newQuantities);
   };
 
-  const total = quantities.reduce((sum, qty, index) => sum + qty * drinks[index].price, 0);
-  const vat = total * 0.18;
-  const totalWithVat = total + vat;
+
 
   const paymentMethods = [
     { id: 1, name: 'MTN Mobile Money', image: require('../assets/mtn.jpeg') },

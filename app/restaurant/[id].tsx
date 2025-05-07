@@ -35,7 +35,7 @@ export default function ChooseKigaliScreen() {
   }, [id]);
 
   const handleOrdered = () => {
-    router.push('/cart');
+    router.push('/cartScreen');
   };
 
   const handleCallWaiter = () => {
@@ -44,7 +44,7 @@ export default function ChooseKigaliScreen() {
 
   const handleCategoryPress = (category: string) => {
     router.push({
-      pathname: '/cart',
+      pathname: '/cartScreen',
       params: { id: id.toString(), category },
     });
   };

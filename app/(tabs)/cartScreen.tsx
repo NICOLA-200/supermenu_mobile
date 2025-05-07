@@ -51,7 +51,7 @@ const DrinkScreen = () => {
   );
 
   const handleCheckout = () => {
-    router.push('/checkout');
+    router.push('/checkoutScreen');
   };
 
   return (

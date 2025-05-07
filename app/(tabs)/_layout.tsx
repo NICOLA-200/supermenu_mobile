@@ -5,7 +5,7 @@ import { Redirect } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-import { HapticTab } from '@/components/HapticTab';
+import { HapticTab } from '@/components/default/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '../../hooks/theme/useColorScheme';
@@ -60,14 +60,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="notifications"
+        name="notificationScreen"
         options={{
           title: 'notification',
           tabBarIcon: ({ color }) => <Ionicons name="notifications" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="restuarant"
+        name="restuarantScreen"
         options={{
           title: 'restuarant',
           tabBarIcon: ({ color }) => (
@@ -76,14 +76,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="profileScreen"
         options={{
           title: 'profile',
           tabBarIcon: ({ color }) => <FontAwesome6 name="user" size={24} color="#111" />,
         }}
       />
       <Tabs.Screen
-        name="cart"
+        name="cartScreen"
         options={({ navigation }) => ({
           headerTitle: '',
           title: 'cart',
