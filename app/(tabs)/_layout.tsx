@@ -1,9 +1,11 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
+import { Redirect } from 'expo-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 import { HapticTab } from '@/components/HapticTab';
-
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '../../hooks/theme/useColorScheme';
@@ -14,6 +16,12 @@ import Entypo from '@expo/vector-icons/Entypo';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
+  // Redirect to login if not authenticated
+  if (!isAuthenticated) {
+    return <Redirect href="/(auth)/login" />;
+  }
 
   return (
     <Tabs
@@ -36,13 +44,14 @@ export default function TabLayout() {
             overflow: 'hidden',
             height: 80,
             paddingTop: 14,
-            bottom:0
+            bottom: 0,
           },
           default: {
             backgroundColor: Colors[colorScheme ?? 'light'].background,
           },
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -60,8 +69,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="restuarant"
         options={{
-          title: 'Restuarant',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="google-nearby" size={24} color={color} />,
+          title: 'restuarant',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="google-nearby" size={24} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -73,25 +84,22 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="cart"
-         options={({ navigation, route }) => {
-                   
-                    return {
-                      headerTitle: '',
-                      title:"cart",
-                      headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.goBack()} className="ml-4 p-2 bg-neutral-200">
-                          <Ionicons name="arrow-back" size={24} color="#F97316" />
-                        </TouchableOpacity>
-                      ),
-                      tabBarIcon :({ color }) => <FontAwesome6 name="cart-shopping" size={24} color="#111" /> , 
-                      headerStyle: { backgroundColor: '#fff' },
-                    
-                      headerTintColor: '#F97316',
-                      headerTitleStyle: { fontWeight: 'bold', fontSize: 18  },
-                    };
-                  
-                }
-              }
+        options={({ navigation }) => ({
+          headerTitle: '',
+          title: 'cart',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              className="ml-4 p-2 bg-neutral-200"
+            >
+              <Ionicons name="arrow-back" size={24} color="#F97316" />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ color }) => <FontAwesome6 name="cart-shopping" size={24} color="#111" />,
+          headerStyle: { backgroundColor: '#fff' },
+          headerTintColor: '#F97316',
+          headerTitleStyle: { fontWeight: 'bold', fontSize: 18 },
+        })}
       />
     </Tabs>
   );
