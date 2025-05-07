@@ -48,7 +48,7 @@ const Profile: React.FC<ProfileProps> = ({ fullName, email, imageUrl }) => {
         {/* Logout Button */}
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-red-500 py-4 rounded-lg items-center mb-6"
+          className="bg-red-500 py-4 rounded-lg items-center mb-9"
         >
           <Text className="text-white text-lg font-semibold">Logout</Text>
         </TouchableOpacity>
