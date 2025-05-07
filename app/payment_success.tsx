@@ -46,8 +46,8 @@ const App = () => {
 
 
   return (
-    <View className="flex-1 gap-12 bg-black justify-center items-center p-4">
-      <Image source={require('../assets/cash.jpg')} className="w-32 h-32 mb-4" />
+    <View className="flex-1 gap-8 bg-black justify-center items-center p-4">
+      <Image source={require('../assets/payment.png')} className="w-42 h-42 mb-4" />
       <Text className="text-orange-500 text-2xl font-bold mb-2">Payment Success, Yayy!</Text>
       <Text className="text-white text-center mb-4">We will send order details and invoice in your contact no. and registered email</Text>
       <TouchableOpacity className=" p-4 rounded-lg mb-4">
@@ -56,7 +56,7 @@ const App = () => {
       <TouchableOpacity className="bg-orange-500 p-4 px-12 rounded-lg mb-4">
         <Text className="text-white text-2xl text-center">Download Invoice</Text>
       </TouchableOpacity>
-      <Text className="text-white text-5xl font-extrabold">Supa<Text className='text-orange-500'
+      <Text className="text-white text-4xl font-extrabold">Supa<Text className='text-orange-500'
       >Menu</Text></Text>
     </View>
   );

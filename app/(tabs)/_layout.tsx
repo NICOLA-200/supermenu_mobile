@@ -1,12 +1,12 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from '../../hooks/theme/useColorScheme';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -29,10 +29,10 @@ export default function TabLayout() {
             backgroundColor: 'transparent',
             borderTopWidth: 0,
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.8,
-            shadowRadius: 8,
-            borderRadius: 60,
+            shadowOffset: { width: 5, height: 8 },
+            shadowOpacity: 0.9,
+            shadowRadius: 15,
+            borderRadius: 50,
             overflow: 'hidden',
             height: 80,
             paddingTop: 14,
@@ -44,39 +44,54 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
-          title: '',
+          title: 'home',
           tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="notifications"
         options={{
-          title: '',
+          title: 'notification',
           tabBarIcon: ({ color }) => <Ionicons name="notifications" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="restuarant"
         options={{
-          title: '',
+          title: 'Restuarant',
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="google-nearby" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="clock"
+        name="profile"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <FontAwesome6 name="clock-rotate-left" size={24} color={color} />,
+          title: 'profile',
+          tabBarIcon: ({ color }) => <FontAwesome6 name="user" size={24} color="#111" />,
         }}
       />
       <Tabs.Screen
         name="cart"
-        options={{
-          title: '',
-          tabBarIcon: ({ color }) => <Ionicons name="cart" size={24} color={color} />,
-        }}
+         options={({ navigation, route }) => {
+                   
+                    return {
+                      headerTitle: '',
+                      title:"cart",
+                      headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.goBack()} className="ml-4 p-2 bg-neutral-200">
+                          <Ionicons name="arrow-back" size={24} color="#F97316" />
+                        </TouchableOpacity>
+                      ),
+                      tabBarIcon :({ color }) => <FontAwesome6 name="cart-shopping" size={24} color="#111" /> , 
+                      headerStyle: { backgroundColor: '#fff' },
+                    
+                      headerTintColor: '#F97316',
+                      headerTitleStyle: { fontWeight: 'bold', fontSize: 18  },
+                    };
+                  
+                }
+              }
       />
     </Tabs>
   );

@@ -40,51 +40,14 @@ const App = () => {
   const totalWithVat = total + vat;
 
   const paymentMethods = [
-    { id: 1, name: 'MTN Mobile Money', image: require('../assets/airtel.png') },
+    { id: 1, name: 'MTN Mobile Money', image: require('../assets/mtn.jpeg') },
     { id: 2, name: 'Airtel Money', image: require('../assets/airtel.png') },
-    { id: 3, name: 'Cash', image: require('../assets/airtel.png') },
+    { id: 3, name: 'Cash', image: require('../assets/cash.jpg') },
   ];
 
   const handlePay = () => {
       router.push('/payment_success')
   }
-
-  // if (!checkoutVisible) {
-  //   return (
-  //     <ScrollView className="flex-1 bg-white p-4">
-  //       <Text className="text-2xl font-bold text-center text-orange-500 mt-4">Choose Kigali Drinks</Text>
-  //       {drinks.map((drink, index) => (
-  //         <View key={drink.id} className="bg-gray-100 p-4 rounded-lg mb-4 flex-row items-center">
-  //           <Image source={drink.image} className="w-16 h-16 mr-4" />
-  //           <View className="flex-1">
-  //             <Text className="text-lg font-semibold">{drink.name} - {drink.price / 1000}.5</Text>
-  //             <Text className="text-gray-600">{drink.description}</Text>
-  //             <Text className="text-green-600">Frw {drink.price}</Text>
-  //           </View>
-  //           <View className="flex-row items-center">
-  //             <TouchableOpacity onPress={() => updateQuantity(index, -1)} className="bg-gray-300 p-2 rounded">
-  //               <Text className="text-white">-</Text>
-  //             </TouchableOpacity>
-  //             <Text className="mx-2">{quantities[index]}</Text>
-  //             <TouchableOpacity onPress={() => updateQuantity(index, 1)} className="bg-gray-300 p-2 rounded">
-  //               <Text className="text-white">+</Text>
-  //             </TouchableOpacity>
-  //           </View>
-  //         </View>
-  //       ))}
-  //       <TouchableOpacity className="bg-orange-500 p-4 rounded-lg mb-4">
-  //         <Text className="text-white text-center">more drinks →</Text>
-  //       </TouchableOpacity>
-  //       <View className="flex-row justify-between items-center mb-4">
-  //         <Text className="text-lg font-semibold">Total</Text>
-  //         <Text className="text-lg text-orange-500">Frw {total}</Text>
-  //       </View>
-  //       <TouchableOpacity className="bg-orange-500 p-4 rounded-lg" onPress={() => setCheckoutVisible(true)}>
-  //         <Text className="text-white text-center">Proceed to checkout</Text>
-  //       </TouchableOpacity>
-  //     </ScrollView>
-  //   );
-  // }
 
   return (
     <View className="flex-1 bg-gray-50 ">
@@ -97,11 +60,11 @@ const App = () => {
         </View>
       </View>
       
-      <View className="flex-row absolute rounded-3xl -bottom-12 right-14 items-center justify-center mb-4">
-        <TouchableOpacity className="bg-white p-5 shadow-green-500 shadow-sm w-[40%] rounded">
+      <View className="flex-row absolute  -bottom-12 right-14 items-center justify-center mb-4">
+        <TouchableOpacity className="bg-white p-7  shadow-green-400 shadow-sm w-[45%] rounded-3xl">
           <Text className="text-black-">Credit card</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="bg-green-600 p-5  shadow-sm w-[40%] rounded">
+        <TouchableOpacity className="bg-green-600 p-7  shadow-sm w-[45%] rounded-3xl">
           <Text className="text-white font-bold">Mobile & Cash</Text>
         </TouchableOpacity>
       </View>
@@ -115,7 +78,7 @@ const App = () => {
       <Text className="text-gray-500 my-8 text-center mb-4 w-[80%] mx-auto">We will send you an order detail to your email after the successful payment!</Text>
       <TouchableOpacity
          onPress={handlePay}
-      className="bg-green-500 my-4 p-4 w-[80%] mx-auto rounded-lg">
+      className="bg-green-500 my-4 p-6 w-[80%] mx-auto rounded-lg">
         <Text className="text-white font-bold text-center">Pay for the order</Text>
       </TouchableOpacity>
     </View>

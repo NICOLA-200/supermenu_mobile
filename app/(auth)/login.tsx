@@ -3,23 +3,35 @@ import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Checkbox } from 'react-native-paper'; 
 import { useRouter } from 'expo-router';
+import { useDispatch , useSelector } from 'react-redux';
+import { login } from '../../redux/authActions';
+import { useToast } from 'react-native-toast-notifications';
+import { AppDispatch, RootState } from '@/redux/store';
 
 const SignupScreen = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [rememberMe, setRememberMe] = React.useState(false);
-    const router =  useRouter()
-  
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [rememberMe, setRememberMe] = React.useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>(); 
+  const toast = useToast()
 
-    const handleHome = () => {
-      // Navigate to a sign-in screen (placeholder)
-      router.replace("/home");
-    };
+  const { isLoading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
 
-    const handleSignin = () => {
-      // Navigate to a register screen (placeholder)
-      router.push('/signup');
-    };
+
+  const handleSignIn = async () => {
+    try {
+      await dispatch(login( email, password ));
+      router.replace("/(tabs)")
+    } catch (err) {
+      // Error is handled via Redux state
+      toast.show("error occurred")
+    }
+  };
+
+  const handleSignUp = () => {
+    router.push('/(auth)/signup'); // Adjust to your signup route
+  };
 
     return (
       <View className="flex-1">
@@ -57,6 +69,10 @@ const SignupScreen = () => {
             secureTextEntry
           />
         </View>
+
+        {error && (
+          <Text className="text-red-500 text-center mb-4">{error}</Text>
+        )}
   
         {/* Remember Me Checkbox */}
         <View className="flex-row items-center mb-6">
@@ -70,7 +86,8 @@ const SignupScreen = () => {
   
         {/* Sign In Button */}
         <TouchableOpacity 
-          onPress={handleHome}
+        disabled={isLoading}
+          onPress={handleSignIn}
         className="bg-orange-500 py-5 rounded-lg mb-6">
           <Text className="text-white text-center font-bold">Sign In</Text>
         </TouchableOpacity>
@@ -84,12 +101,16 @@ const SignupScreen = () => {
   
         {/* Social Login Options */}
         <View className=" flex gap-4">
-          <TouchableOpacity className="border border-gray-300 py-3 rounded-lg flex-row justify-center items-center">
+          <TouchableOpacity 
+          disabled={isLoading}
+          className="border border-gray-300 py-3 rounded-lg flex-row justify-center items-center">
             <Image source={require('../../assets/google.png')} className="w-6 h-6 mr-2" />
             <Text>Login with Google</Text>
           </TouchableOpacity>
   
-          <TouchableOpacity className="border border-gray-300 py-3 rounded-lg flex-row justify-center items-center">
+          <TouchableOpacity 
+          disabled={isLoading}
+          className="border border-gray-300 py-3 rounded-lg flex-row justify-center items-center">
             <Image source={require('../../assets/facebook.png')} className="w-6 h-6 mr-2" />
             <Text>Login with Facebook</Text>
           </TouchableOpacity>
@@ -101,7 +122,8 @@ const SignupScreen = () => {
             <Text className="text-orange-500 text-center">Forgot Password?</Text>
           </TouchableOpacity>
           <TouchableOpacity
-          onPress={handleSignin}>
+          disabled={isLoading}
+          onPress={handleSignUp}>
             <Text className="text-gray-600 text-center mt-3">
 <Text className="text-gray-500">Don&apos;t have a account? </Text>
             <Text className="text-orange-500 font-semibold">Register</Text>

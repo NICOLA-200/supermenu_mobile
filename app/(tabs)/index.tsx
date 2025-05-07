@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store'; 
+
 export default function HomeScreen() {
   const router = useRouter();
+ const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.navigate("/(auth)/login")
+    }
+  },[isAuthenticated])
+
+  
 
   return (
     <View className="flex-1 bg-orange-400 justify-center gap-y-12 items-center p-4">
