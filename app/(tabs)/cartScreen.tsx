@@ -55,7 +55,7 @@ const DrinkScreen = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white p-6">
+    <ScrollView className="flex-1 pt-32 flex  bg-white p-6">
       <Text className="text-2xl font-bold mb-1 text-right text-orange-500">Choose Kigali</Text>
       <Text className="text-right text-2xl mb-4">Drinks</Text>
 
