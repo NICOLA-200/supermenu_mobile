@@ -29,9 +29,8 @@ const Profile: React.FC<ProfileProps> = ({ fullName, email, imageUrl }) => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
-      <StatusBar style="auto" />
-      <View className="flex-1 p-6">
+    <SafeAreaView className="flex-1 flex my-32  bg-gray-100">
+      <View className="flex-1  flex justify-around  p-6">
         {/* Profile Header */}
         <View className="items-center mt-10">
           <Image
@@ -43,12 +42,12 @@ const Profile: React.FC<ProfileProps> = ({ fullName, email, imageUrl }) => {
         </View>
 
         {/* Spacer */}
-        <View className="flex-1" />
+        <View className="flex-1 " />
 
         {/* Logout Button */}
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-red-500 py-4 rounded-lg items-center mb-9"
+          className="bg-red-500 py-4 rounded-lg items-center"
         >
           <Text className="text-white text-lg font-semibold">Logout</Text>
         </TouchableOpacity>

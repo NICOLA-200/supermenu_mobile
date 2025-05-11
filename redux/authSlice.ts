@@ -11,7 +11,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   userId: null,
   fullName: null,
   email: null,

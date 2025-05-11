@@ -51,7 +51,7 @@ const App = () => {
 
   return (
     <View className="flex-1 bg-gray-50 ">
-      <View className='bg-white mb-14 rounded-b-[4rem] py-16 shadow-sm shadow-neutral-200 px-5'>
+      <View className='bg-white mb-14 rounded-b-[4rem] py-16 shadow-md shadow-neutral-500 px-5'>
       <View className="flex-row justify-between mb-4">
       <Text className="text-2xl font-bold mb-4">Checkout</Text>
       <View className='text-2xl gap-3'>
@@ -61,11 +61,11 @@ const App = () => {
       </View>
       
       <View className="flex-row absolute  -bottom-12 right-14 items-center justify-center mb-4">
-        <TouchableOpacity className="bg-white p-7  shadow-green-400 shadow-sm w-[45%] rounded-3xl">
+        <TouchableOpacity className="bg-white p-7  shadow-neutral-600 shadow-md w-[45%] rounded-3xl">
           <Text className="text-black-">Credit card</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="bg-green-600 p-7  shadow-sm w-[45%] rounded-3xl">
-          <Text className="text-white font-bold">Mobile & Cash</Text>
+        <TouchableOpacity className="bg-green-600 py-7 px-2  shadow-sm w-[45%] rounded-3xl">
+          <Text className="text-white font-bold ">Mobile & Cash</Text>
         </TouchableOpacity>
       </View>
       </View>

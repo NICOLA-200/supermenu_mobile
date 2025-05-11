@@ -19,9 +19,9 @@ export default function TabLayout() {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   // Redirect to login if not authenticated
-  if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Redirect href="/(auth)/login" />;
+  // }
 
   return (
     <Tabs
@@ -40,12 +40,30 @@ export default function TabLayout() {
             shadowOffset: { width: 5, height: 8 },
             shadowOpacity: 0.9,
             shadowRadius: 15,
-            borderRadius: 50,
+            borderTopLeftRadius: 50, // Top-left corner radius
+      borderTopRightRadius: 50,
             overflow: 'hidden',
             height: 80,
             paddingTop: 14,
             bottom: 0,
           },
+          android: {
+      position: 'absolute',
+      backgroundColor: 'white', 
+      borderTopWidth: 0,
+      elevation: 5, 
+      shadowColor: 'black', 
+      shadowOffset: { width: 5, height: 8 }, 
+      shadowOpacity: 0.3, // 
+      shadowRadius: 15, // Match iOS shadow radius
+      
+      borderTopLeftRadius: 50, 
+      borderTopRightRadius: 50,
+      height: 80, // 
+      paddingTop: 14, // Match iOS padding
+      paddingBottom: 8, 
+      bottom: 40,
+    },
           default: {
             backgroundColor: Colors[colorScheme ?? 'light'].background,
           },

@@ -24,5 +24,4 @@ export interface Restaurant {
   name: string;
   description: string;
   imageUrl: string;
-  menu: string[];
 }

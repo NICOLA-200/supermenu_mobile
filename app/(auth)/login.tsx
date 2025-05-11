@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { Checkbox } from 'react-native-paper'; 
+import { ActivityIndicator, Checkbox } from 'react-native-paper'; 
 import { useRouter } from 'expo-router';
 import { useDispatch , useSelector } from 'react-redux';
 import { login } from '../../redux/authActions';
@@ -20,13 +20,14 @@ const SignupScreen = () => {
 
 
   const handleSignIn = async () => {
-    try {
-      await dispatch(login( email, password ));
-      router.replace("/(tabs)")
-    } catch (err) {
-      // Error is handled via Redux state
-      toast.show("error occurred")
-    }
+    // try {
+    //   await dispatch(login( email, password ));
+    //   router.replace("/(tabs)")
+    // } catch (err) {
+    //   // Error is handled via Redux state
+    //   toast.show("error occurred")
+    // }
+    router.push("/(tabs)")
   };
 
   const handleSignUp = () => {
@@ -34,7 +35,8 @@ const SignupScreen = () => {
   };
 
     return (
-      <View className="flex-1">
+      <ScrollView className='bg-white '>
+      <View className="flex-1 ">
             {/* Orange top background */}
             <View className="absolute top-0 left-0 right-0 h-1/4 bg-orange-400 " />
         {/* Header */}
@@ -89,7 +91,7 @@ const SignupScreen = () => {
         disabled={isLoading}
           onPress={handleSignIn}
         className="bg-orange-500 py-5 rounded-lg mb-6">
-          <Text className="text-white text-center font-bold">Sign In</Text>
+        { isLoading ? <ActivityIndicator size="large" color="#ffffff" /> :  <Text className="text-white text-center font-bold">Sign In</Text> }
         </TouchableOpacity>
   
         {/* Divider */}
@@ -117,7 +119,7 @@ const SignupScreen = () => {
         </View>
   
         {/* Footer Links */}
-        <View className="mt-6 text-xl space-y-2">
+        <View className="mt-6 mb-12 text-xl space-y-2">
           <TouchableOpacity>
             <Text className="text-orange-500 text-center">Forgot Password?</Text>
           </TouchableOpacity>
@@ -132,6 +134,7 @@ const SignupScreen = () => {
         </View>
       </View>
       </View>
+      </ScrollView>
       
 
   

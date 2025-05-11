@@ -60,26 +60,26 @@ const DrinkScreen = () => {
       <Text className="text-right text-2xl mb-4">Drinks</Text>
 
       {drinks.map((drink) => (
-        <View key={drink.id} className="bg-gray-100 p-4 rounded-lg mb-4 flex-row items-center">
+        <View key={drink.id} className="bg-gray-100 p-1 rounded-lg mb-4 flex-row items-center">
           <Image source={drink.image} className="w-16 h-16 mr-4 rounded-md" />
           <View className="flex-1">
-            <Text className="text-lg font-semibold">
+            <Text className="text-sm font-semibold">
               {drink.name} - {drink.price / 1000}.0
             </Text>
-            <Text className="text-gray-600">{drink.description}</Text>
-            <Text className="text-green-600">Frw {drink.price}</Text>
+            <Text className="text-gray-600 text-[0.7rem] ">{drink.description}</Text>
+            <Text className="text-green-600 text-[0.8rem]">Frw {drink.price}</Text>
           </View>
           <View className="flex-row items-center">
             <TouchableOpacity
               onPress={() => updateQuantity(drink.id, -1)}
-              className="bg-gray-300 p-2 rounded"
+              className="bg-gray-300 p-2 px-4 rounded"
             >
               <Text className="text-orange-500">-</Text>
             </TouchableOpacity>
             <Text className="mx-2 text-black">{quantities[drink.id] || 0}</Text>
             <TouchableOpacity
               onPress={() => updateQuantity(drink.id, 1)}
-              className="bg-gray-300 p-2 rounded"
+              className="bg-gray-300 p-2 px-4 rounded"
             >
               <Text className="text-orange-500">+</Text>
             </TouchableOpacity>

@@ -48,7 +48,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <ToastProvider>
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? ( */}
           <Stack>
             <Stack.Screen 
               name="(tabs)" 
@@ -115,7 +115,8 @@ export default function RootLayout() {
             />
             <Stack.Screen name="+not-found" />
           </Stack>
-        )}
+          
+        {/* )} */}
         <StatusBar style="auto" />
       </ToastProvider>
     </Provider>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import { useToast } from 'react-native-toast-notifications';
 import { signup } from '@/redux/authActions';
+import { ActivityIndicator } from 'react-native-paper';
 
 export default function LoginScreen() {
   const [fullName, setFullName] = useState('');
@@ -20,13 +21,14 @@ export default function LoginScreen() {
 
 
   const handleSignUp = async () => {
-    try {
-      await dispatch(signup( email, password , fullName ));
-      router.replace("/(tabs)")
-    } catch (err) {
-      // Error is handled via Redux state
-      toast.show("error occurred")
-    }
+    // try {
+    //   await dispatch(signup( email, password , fullName ));
+    //   router.replace("/(tabs)")
+    // } catch (err) {
+    //   // Error is handled via Redux state
+    //   toast.show("error occurred")
+    // }
+    router.push("/(tabs)")
   };
 
   const handleSignIn = () => {
@@ -40,7 +42,7 @@ export default function LoginScreen() {
       <View className="absolute top-0 left-0 right-0 h-1/4 bg-orange-400 " />
       
       {/* Content */}
-      <View className="flex-1 bg-white rounded-t-[4rem] space-y-3 mt-16 px-6">
+      <View className="flex-1 bg-white  rounded-t-[4rem] space-y-3 mt-24 px-6">
         {/* Logo */}
         <Text className="text-4xl font-bold text-center mt-8">
           <Text className="text-black">Supa</Text>
@@ -52,7 +54,7 @@ export default function LoginScreen() {
         <Text className="text-gray-500 text-center mt-2">Please fill in the information</Text>
 
         {/* Input Fields */}
-        <View className="mt-8">
+        <View className="mt-8 p-4">
           {/* Full Name */}
           <View className="flex-row items-center bg-gray-100 rounded-lg p-3 mb-4">
             <Ionicons name="person-outline" size={20} color="gray" />
@@ -91,7 +93,7 @@ export default function LoginScreen() {
         </TouchableOpacity> */}
    <View className="mb-4">
           <TextInput
-            className="border border-gray-300 rounded-lg p-4"
+            className="border border-gray-300 mx-3 rounded-lg p-4"
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
@@ -100,17 +102,18 @@ export default function LoginScreen() {
         </View>
 
   {error && (
-          <Text className="text-red-500 text-center mb-4">{error}</Text>
+          <Text className="text-red-500 p-3 text-center mb-4">{error}</Text>
         )}
 
         {/* Sign In Text and Button */}
         <Text className="text-gray-500 text-center">If you have a PMG account</Text>
         <TouchableOpacity
         disabled={isLoading}
-          className="bg-orange-500 rounded-lg py-3 mt-4"
+          className="bg-orange-500 my-3 rounded-lg mx-3 py-5 mt-4"
           onPress={handleSignUp}
         >
-          <Text className="text-white text-center text-lg font-semibold">Sign In</Text>
+           { isLoading ? <ActivityIndicator size="large" color="#ffffff" /> :  <Text className="text-white text-center font-bold">Sign In</Text> }
+          
         </TouchableOpacity>
 
         {/* Register Link */}
@@ -119,7 +122,7 @@ export default function LoginScreen() {
         onPress={handleSignIn} className="mt-4">
           <Text className="text-center">
             
-             have an account? <Text className="text-orange-500">sign in</Text>
+             have an account? <Text className="text-orange-500">sign up</Text>
           </Text>
         </TouchableOpacity>
       </View>
